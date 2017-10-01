@@ -1,0 +1,24 @@
+
+API Source: https://ropsten.etherscan.io/apis#accounts
+
+
+** Get Ether Balance for a single Address **
+
+https://ropsten.etherscan.io/api?module=account&action=balance&address=0xa8e2f51f33abf0542cfda5d0ad48fe9507da88b0&tag=latest&apikey=BT7RSI4PJYFZAA145SZBH1HMH7J2WM5PUJ
+
+Will result:
+
+{"status":"1","message":"OK","result":"1000000000000000000"}
+
+
+ *** Get transaction list **
+
+http://ropsten.etherscan.io/api?module=account&action=txlist&address=0xa8e2f51f33abf0542cfda5d0ad48fe9507da88b0&sort=desc&apikey=BT7RSI4PJYFZAA145SZBH1HMH7J2WM5PUJ
+
+Will result:
+
+{"status":"0","message":"No transactions found","result":[]}
+
+
+
+API Source 2: https://github.com/sebs/etherscan-api
