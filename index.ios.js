@@ -18,50 +18,13 @@ import {
   NavigatorIOS,
 } from 'react-native';
 
-var vendorAddress = '0xaac6e508b9e87d878624f7932d0d5a0977b11fc3';
-var apiKey = 'BT7RSI4PJYFZAA145SZBH1HMH7J2WM5PUJ';
-
-function urlForQueryAndPage(key, value) {
-    const data = {
-      module: 'account',
-      action: 'balance',
-      tag: 'latest',
-      apikey: {apiKey},
-    };
-    data[key] = value;
-
-    const querystring = Object.keys(data)
-      .map(key => key + '=' + encodeURIComponent(data[key]))
-      .join('&');
-
-    return 'http://ropsten.etherscan.io/api?' + querystring;
-}
-
 class POS extends Component {
-    constructor(props) {
+    constructor() {
         super();
         this.state = {
             selectedTab: 'Payments',
+            message: '',
         };
-    }
-
-    _onAcctBalanceTabPressed = () => {
-      const query = urlForQueryAndPage('address', vendorAddress);
-      this._executeQuery(query);
-    }
-
-    _executeQuery = (query) => {
-      console.log(query);
-      //this.setState({ isLoading: true });
-      fetch(query)
-        .then(response => response.json())
-        .then(json => this._handleResponse(json.response))
-        .catch(error =>
-          this.setState({
-              //isLoading: false,
-              message: 'Something bad happened ' + error
-          })
-        );
     }
 
     render() {
@@ -90,7 +53,6 @@ class POS extends Component {
                     title='Account Balance'
                     selected={this.state.selectedTab === 'Account Balance'}
                     onPress={() => {
-                      this._onAcctBalanceTabPressed,
                       this.setState({
                         selectedTab: 'Account Balance',
                       });

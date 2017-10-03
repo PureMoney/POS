@@ -10,38 +10,60 @@ import React, { Component } from 'react';
 import {
     StyleSheet,
     Text,
-    TextInput,
     View,
-    Button,
-    Image,
 } from 'react-native';
 
 var vendorAddress = '0xaac6e508b9e87d878624f7932d0d5a0977b11fc3';
+var apiKey = 'BT7RSI4PJYFZAA145SZBH1HMH7J2WM5PUJ';
+
+function urlForQueryAndPage(key, value) {
+    const data = {
+      module: 'account',
+      action: 'balance',
+      tag: 'latest',
+      apikey: {apiKey},
+    };
+    data[key] = value;
+
+    const querystring = Object.keys(data)
+      .map(key => key + '=' + encodeURIComponent(data[key]))
+      .join('&');
+
+    return 'https://ropsten.etherscan.io/api?' + querystring;
+}
+
+function convertToETH(val)
+{
+  var result = parseInt(val) / 1000000000000000000;
+  return result;
+}
 
 export default class AccountBalancePage extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        ethValue: '194.056',
-        fiatValue: '56,926.477',
+        ethValue: '0',
+        fiatValue: '500.00',
       };
     }
 
-    //const query = urlForQueryAndPage('place_name', this.state.searchString);
-    //this._executeQuery(query);
-
-    _executeQuery = (query) => {
-      console.log(query);
-      this.setState({ isLoading: true });
+    componentDidMount() {
+      console.log('component mounted!');
+      const query = urlForQueryAndPage('address', vendorAddress);
+      console.log('query run: ' + query);
       fetch(query)
-        .then(response => response.json())
-        .then(json => this._handleResponse(json.response))
-        .catch(error =>
-          this.setState({
-              isLoading: false,
-              message: 'Something bad happened ' + error
-          })
-        );
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log('from API: ' + responseJson.result);
+        this.setState({
+          ethValue: convertToETH(responseJson.result),
+        }, function() {
+          // do something with new state
+        });
+      })
+      .catch(function(error) {
+        console.log('error encountered: ' + error);
+      });
     }
 
     render() {
@@ -77,12 +99,6 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         color: '#434343'
     },
-    payProcItem: {
-        marginBottom: 10,
-        fontSize: 15,
-        textAlign: 'left',
-        color: '#434343'
-    },
     moneyItem: {
         marginTop: 30,
         fontSize: 30,
@@ -100,16 +116,5 @@ const styles = StyleSheet.create({
         marginTop: 40,
         marginBottom: 50,
         alignItems: 'center'
-    },
-    image: {
-        marginLeft: 280,
-        justifyContent: 'flex-end',
-        width: 30,
-        height: 30,
-    },
-    flowRight: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        alignSelf: 'stretch',
     },
 });

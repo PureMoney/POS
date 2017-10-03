@@ -13,7 +13,6 @@ import {
     TextInput,
     View,
     Button,
-    Image,
 } from 'react-native';
 
 export default class AccountSettingsPage extends Component {
@@ -109,11 +108,5 @@ const styles = StyleSheet.create({
         color: '#48BBEC',
         borderWidth: 1,
         borderColor: '#48BBEC',
-    },
-    image: {
-        marginLeft: 280,
-        justifyContent: 'flex-end',
-        width: 30,
-        height: 30,
     },
 });
