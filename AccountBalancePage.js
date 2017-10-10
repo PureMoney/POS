@@ -32,10 +32,14 @@ function urlForQueryAndPage(key, value) {
     return 'https://ropsten.etherscan.io/api?' + querystring;
 }
 
-function convertToETH(val)
-{
+function convertToETH(val) {
   var result = parseInt(val) / 1000000000000000000;
   return result;
+}
+
+function convertExchangeRate(val, rate) {
+  var res = (val * rate).toFixed(2);
+  return res;
 }
 
 export default class AccountBalancePage extends Component {
@@ -43,7 +47,7 @@ export default class AccountBalancePage extends Component {
       super(props);
       this.state = {
         ethValue: '0',
-        fiatValue: '500.00',
+        ethToUsdExRate: 302.26, //TODO: Get the live eth to usd rate
       };
     }
 
@@ -79,7 +83,7 @@ export default class AccountBalancePage extends Component {
                     &#x39E; {this.state.ethValue} ETH
                 </Text>
                 <Text style={styles.fiatItem}>
-                    $ {this.state.fiatValue} USD
+                    $ {convertExchangeRate(this.state.ethValue, this.state.ethToUsdExRate)} USD
                 </Text>
               </View>
         );

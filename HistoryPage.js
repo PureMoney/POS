@@ -124,7 +124,7 @@ export default class HistoryPage extends Component {
             renderSeparator= {this.ListViewItemSeparator}
             renderRow={(rowData) =>
                <View style={{flex:1, flexDirection: 'column'}} >
-                 <TouchableOpacity onPress={this.GetItem.bind(this, rowData.value)} >
+                 <TouchableOpacity onPress={this.GetItem.bind(this, rowData.value)}>
                    <Text style={styles.textHilite} >IN</Text>
                    <Text style={styles.textHilite} >{'Amount: ' + convertToETH(rowData.value)} ETH</Text>
                    <Text style={styles.textViewContainer} >{'From:' + rowData.from}</Text>
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     separator: {
       height: 1,
       width: "100%",
-      backgroundColor: "#607D8B",
+      backgroundColor: "#434343",
     },
     mainContainer :{
       justifyContent: 'center',

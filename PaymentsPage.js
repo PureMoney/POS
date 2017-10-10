@@ -18,7 +18,7 @@ import {
 } from 'react-native';
 
 
-var vendorAddress = '0xaac6e508b9e87d878624f7932d0d5a0977b11fc3'; //'0xaac6e508b9e87d878624f7932d0d5a0977b11fc3',
+var vendorAddress = '0xaac6e508b9e87d878624f7932d0d5a0977b11fc3';
 
 export default class PaymentsPage extends Component {
     constructor(props) {

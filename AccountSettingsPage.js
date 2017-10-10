@@ -11,6 +11,7 @@ import {
     StyleSheet,
     Text,
     TextInput,
+    Image,
     View,
     Button,
 } from 'react-native';
@@ -57,6 +58,7 @@ export default class AccountSettingsPage extends Component {
                 <TextInput
                     style={styles.textInput}
                     placeholder='Phone number'/>
+
                 <Button
                     onPress={() => {}}
                     style={styles.button}
