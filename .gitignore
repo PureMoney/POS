@@ -1,0 +1,15 @@
+node_modules
+imports
+build
+keys/*
+parity-genesis.json
+parityPassword
+test-results.xml
+contracts/Updated*.sol
+*.sole
+coverage
+coverage.json
+coverageEnv
+scTopics
+allFiredEvents
+lib/dappsys
